@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Result</title>
+</head>
+<body>
+  <script>
+    // Wait for DOM to load
+    window.onload = function () {
+      const queryParams = new URLSearchParams(window.location.search);
+      const jsonResponse = {};
+
+      for (const [key, value] of queryParams.entries()) {
+        jsonResponse[key] = value;
+      }
+
+      // Post response back to parent window (Flutter app)
+      window.parent.postMessage(
+        { type: "paymentResult", data: jsonResponse },
+        "*"
+      );
+    };
+  </script>
+  <h2>Processing payment result...</h2>
+</body>
+</html>
